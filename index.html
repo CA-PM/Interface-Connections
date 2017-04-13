@@ -47,14 +47,14 @@
 
 
 	function getDevices() {
-		var url="/odata/api/devices?$select=Name,LocationDesc&$format=json&$top=500&$filter=((length(LocationDesc) ne 0))"
+		var url="/pc/odata/api/devices?$select=Name,LocationDesc&$format=json&$top=500&$filter=((length(LocationDesc) ne 0))"
 		d3.json(url, function (error, data){
 			devices=data.d.results;
 			checkValues();
 		})
 	}
 	function getExistingConnection () {
-		var url="/odata/api/interfaces(" + interfaceID + ")?select=ConnectsTo&$format=text/csv";
+		var url="/pc/odata/api/interfaces(" + interfaceID + ")?select=ConnectsTo&$format=text/csv";
 		d3.csv(url, function (error, data) {
 			isItPopulated(data);
 		})

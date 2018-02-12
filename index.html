@@ -21,7 +21,7 @@
 	  	<label class="col-md-4 control-label" for="ConnectsTo">Connects To:</label>  
   		<div class="col-md-8">
   			<input id="connectsTo" name="connectsTo" type="text" class="form-control input-md">
-  			<span class="help-block">Select device which connects to this interface</span>  
+  			<span class="help-block">Select Site which this interface connects to.</span>  
   		</div>
   		<div class="form-group">
  	 		<label class="col-md-4 control-label" for="Submit"></label>
@@ -47,7 +47,7 @@
 
 
 	function getDevices() {
-		var url="/pc/odata/api/devices?$select=Name,LocationDesc&$format=json&$top=500&$filter=((length(LocationDesc) ne 0))"
+		var url="/pc/odata/api/groups?$select=Name,LocationDesc&$format=json&$top=5000&$filter=((length(LocationDesc) ne 0))"
 		d3.json(url, function (error, data){
 			devices=data.d.results;
 			checkValues();
@@ -104,11 +104,7 @@
 
 		function checkData () {
 			console.log("checking data validity");
-			if (/\s/.test(connection)) {
-				console.log("Connects to contains a space: " + connection);
-				return false;
-			}
-			else if (connection.length < 1) {
+			if (connection.length < 1) {
 				alert("Connects to is zero characters");
 				return false;
 			}
